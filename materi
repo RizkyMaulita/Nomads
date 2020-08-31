@@ -1,0 +1,91 @@
+
+/* 
+Framework:
+    - Kerangka kerja 
+    - Alat untuk memudahkan kita
+    - Aturan(rules) atau panduan (guidelines)
+    - Standarisasi dalam membuat aplikasi
+Bootstrap :
+    - Framework untuk membuat website
+    - Mempercepat pekerjaan membuat HTML
+    - Dipakai oleh banyak orang
+    - Menyediakan komponen CSS, tombol, tabel, header, tulisan, responsive
+
+Jadi di BWAFWD tidak mengajarkan html,css dasar sehingga jika ingin belajar bisa lihat materi dari WPU 
+    link -> http://bit.ly/WPUHTML
+            http://bit.ly/WPUCSSD
+
+-----------     BOOTSTRAP LAYOUT    ------------
+
+--- Container
+
+    <div class="container">
+        // Content here
+    </div>
+
+--- Container (Fluid)
+
+    <div class="container fluid">
+    </div>
+
+    perbedaan antara fluid dengan tidak ialah, kalau fluid membuat container secara full, sedangkan yang tidak masih ada space
+
+--- Grid 
+
+    <div class="container">
+        <div class="row">
+            <div class="col-3"> Halo Dunia </div>
+            <div class="col-3"> Halo Dunia </div>
+            <div class="col-3"> Halo Dunia </div>
+        </div>
+        <div class="row">
+            <div class="col-6"> Hai </div>
+            <div class="col"> Hai </div>
+        </div>
+
+    setiap satu row bisa memuat sampai 12 col
+
+    link -> http://getbootstrap.com/docs/4.3/layout/grid
+        extra small -> layar HP
+            -> class = ' .col- '
+        small       -> layar HP yang lebih besar
+            -> class = ' .col-sm '
+        medium      -> layar tablet
+            -> class = ' .col-md '
+        large       -> layar monitor laptop
+            -> class = ' .col-lg- '
+        Extra large -> layar monitor PC yang lebih besar
+            -> class = ' .col-xl '
+
+
+---------   BOOTSTRAP CONTENT   -----------
+    (aku males nyatat heheh lihat di link saja ya )
+
+setelah ini ada pemasangan bootstrap lihat di folder template ya heheh
+------------------------------------------------------------------------------------------------
+
+----------      STRUKTUR PROJECT    --------------------
+template/
+    frontend/
+        libraries/
+            bootstrap/
+            jquery/
+        images/
+        scripts/
+        styles/
+    index.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
