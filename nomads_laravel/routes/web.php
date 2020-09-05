@@ -16,6 +16,16 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+// Route::get('/daftar', 'HomeController@daftar');
+
+Auth::routes(['verify' => true]);
+
+Route::get('/','HomeController@index')->name('home');
+Route::get('/detail','DetailController@index')->name('detail');
+Route::get('/checkout', 'CheckoutController@index')->name('checkout');
+Route::get('/checkout/success', 'CheckoutController@success')->name('checkout-success');
+
+
 
 // Jadi, Route::prefix('admin') ini untuk menamakan route di urlnya. jika dinamakan ('coba'), maka di url localhost:8000/coba
 // Sedangkan namespace itu nama folder yang berada di App\Http\Controller. kalau ga pakai folder, maka tidak perlu namespace
@@ -26,13 +36,10 @@ Route::prefix('admin')
     ->group(function(){
         Route::get('/', 'DashboardController@index')
             ->name('dashboard');
+
+        Route::resource('travel-package','TravelPackageController');
     });
 
-Route::get('/','HomeController@index')->name('home');
-Route::get('/detail','DetailController@index')->name('detail');
-Route::get('/checkout', 'CheckoutController@index')->name('checkout');
-Route::get('/checkout/success', 'CheckoutController@success')->name('checkout-success');
 
-Auth::routes(['verify' => true]);
 
-// Route::get('/daftar', 'HomeController@daftar');
+
