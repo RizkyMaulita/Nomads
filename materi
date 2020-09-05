@@ -76,16 +76,71 @@ template/
     index.html
 
 
+------------------------------------------------------------------------------------------------------
+------------------------        MATERI SETELAH MIGRATE DATABASE               ------------------------
+------------------------------------------------------------------------------------------------------
 
 
+-------      Field Roles and MIDDLEWARE ADMIN    --------------
+
+1. buat column roles di table users sebagai pembeda ketika auth
+
+    php artisan make:migration add_roles_field_to_users_table --table=users
+
+                $table->string('roles')->default('USER');        //USER, ADMIN
+
+2. buat middleware untuk admin
+
+    php artisan make:middleware IsAdmin
+
+        use Illuminate\Support\Facades\Auth;
+
+        public function handle($request, Closure $next)
+        {
+            if(Auth::user() && Auth::user()->roles== 'ADMIN'){
+                return $next($request);
+            }
+            return redirect('/');
+        }
+
+3. daftarkan middleware di dalam kernel.php -> di dalam protected $routeMiddleware
+
+        'admin'=> \App\Http\Middleware\IsAdmin::class,
 
 
+4. lalu daftarkan auth dan ganti semua redirect di controller auth ke ('/')
+
+        // protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
 
 
+-------      VERIFIKASI EMAIL     --------
 
+1. di dalam App/User.php, karena sudah menggunakan use MustVerifyEmail, maka yang dilakukan hanyalah 
+    menambahkan implements dalam classnya 
 
+        class User extends Authenticatable implements MustVerifyEmail{}
+    
+2. di dalam route web.php
+    
+        Auth::routes(['verify' => true]);
 
+3. nanti, langsung coba di /register, lalu masuk ke mailtrap.io
+        sebelumnya ada problem karena 'cannot send a message without a sender'. 
+        jadi itu terjadi karena config yang di ada d mailtrap.io kurang menambahkan 'MAIL_FROM_ADDRESS' untuk di .env nya.
+        so lebih lengkapnya seperti ini
 
+            MAIL_MAILER=smtp
+            MAIL_HOST=smtp.mailtrap.io
+            MAIL_PORT=2525
+            MAIL_USERNAME=131ed2f2825292
+            MAIL_PASSWORD=e65117b5a1c948
+            MAIL_ENCRYPTION=tls
+            MAIL_FROM_ADDRESS=from@example.com
+            MAIL_FROM_NAME=Example
 
+--------    CRUD Gallery   -------
 
+1. pada view, untuk memunculkan gambar gunakan enctype="multipart/form-data"
 
+        <form action="{{ route('gallery.store')}}" method="POST" enctype="multipart/form-data">
